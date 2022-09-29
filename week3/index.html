@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Week 3</title>
+</head>
+<body>
+    <a href="\index.html">Go Back</a>
+    <h1>Notes</h1>
+        <p>In Javascript, 'this' is used to refer to an object. For example, a function can use 'this' instead of specifying an object
+            within the function. Using this method allows for code that's less easy to break. </p>
+        <p>An example of using 'this' in Javascript can be seen here: <button id="this-example">Click Me!</button></p>
+    <p>The code used to accomplish this is:<br>
+        let user = {<br>
+        message: "This is an example message!",<br>
+        showMessage() {<br>
+            alert(this.message);<br>
+        }<br>
+    }<br>
+    const clickMe = document.getElementById("this-example")<br>
+    clickMe.addEventListener("click", () => {user.showMessage()})</p>
+    <p>Objects are a way to store key-value pairs in one place. From Javascript: Novice to Ninja, 
+        "One way to think about an object is that it’s like a dictionary where you look up a property name and see a value. 
+        It's like a database of values."
+        The previous code example has a simple object; user.</p>
+    <p>Objects can be nested within other objects; for example:</p>
+    <p>let temples = {<br>
+    washington: {name: 'Washington D.C. Temple'},<br>
+    philadelphia: {name: 'Philadelphia Temple'},<br>
+    palmyra: {name: 'Palmyra New York Temple'},<br>
+    }</p>
+    <p>There are several special object types like Math, Date, and RegExp.</p>
+    <p>In Javascript, you can manipulate an HTML document, or DOM. DOM is often represented by a bunch of nodes for each HTML element. 
+        This is a very common method of getting web pages to do things like having functional buttons or basic animations.
+    </p>
+    <p>The example code from the 'this' demonstration shows an example of DOM manipulation. DOM manipulation can be used for more than
+        just buttons, but that's one of the simpler examples.
+    </p>
+    <p>Event listeners are how Javascript sees how a page is being interacted with. The demo code above contains an event listener
+        that triggers a function when the element is clicked, but there are several other event listeners, such as on key presses or
+        when the physical screen is interacted with.
+    </p>
+    <p>Events can stop the default behavior of a key press or tap, but this isn't common or recommended practice.</p>
+</body>
+<script>
+    let user = {
+        message: "This is an example message!",
+        showMessage() {
+            alert(this.message);
+        }
+    }
+    const clickMe = document.getElementById("this-example")
+    clickMe.addEventListener("click", () => {user.showMessage()})
+</script>
+</html>
