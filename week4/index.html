@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 330 Week 4</title>
+</head>
+<body>
+    <a href="/index.html">Go Back</a>
+    <h1>Notes</h1>
+    <h2>Forms</h2>
+    <p>Forms are used to pass information from the site visitor to the server. They are one of the most common ways to interact with a web page.
+        Forms are used in search engines and sites that have membership or registered users. Knowing how a form works and how to use Javascript in
+        a form is pretty much essential to web development.
+        You can access a form in Javascript by using document.forms[i], or by name as document.forms['name']. You should be careful when accessing
+        forms by name, to avoid accidentally accessing a different element that shares the name of a method or property in the form you're trying
+        to access. You can also access a form by using form.name or form['name'].
+    </p>
+    <p>Forms have properties and methods within Javascript. Some examples are form.submit(), which submits a form, and form.reset(), which resets
+        all input in a form. Using form.action can be used to set the action attribute of a form element. Additionally, using form.reset isn't
+        considered good practice, as it's too easy to accidentally click and clear the entire form.
+    </p>
+    <p>There are several types of form events. The focus event occurs when an element is set to have the cursor focused on it. The blur event
+        occurs when an element is moved away from. It is the opposite of focus. A change event is when the user moves away from a form element
+        after making a change to said element. If a user clicks on an element, then clicks away without changing anything, the blur event will fire
+        instead of the change event.
+    </p>
+    <p>
+        You can stop a form from being submitted by using event.preventDefault. This isn't good practice when making an actual, useable form, but
+        it's handy when you're testing something and don't want to be redirected to a URL that doesn't exist.
+    </p>
+    <p>
+        There are various form controls, including textarea, select, button, and several types of inputs. Examples of these form controls:
+    </p>
+    <input type="text" placeholder="Text Input"><br>
+    <label for="radio">Radio Input</label>
+    <input type="radio" name="radio"><br>
+    <label for="checkbox">Checkbox Input</label>
+    <input type="checkbox" name="checkbox"><br>
+    <label for="color">Color Input</label>
+    <input type="color" name="color"><br>
+    <label for="datetime"></label>Local Date and Time
+    <input type="datetime-local" name="datetime"><br>
+    <input type="tel" placeholder="Phone Number Input"><br>
+    <input type="number" placeholder="Number Input"><br>
+    <label for="select-example">Select</label>
+    <select name="select" id="select-example">
+        <option value="option-1">Option 1</option>
+        <option value="option-2">Option 2</option>
+        <option value="option-3">Option 3</option>
+        <option value="option-4">Option 4</option>
+        <option value="option-5">Option 5</option>
+    </select><br>
+    <label for="example-textarea">Textarea</label><br>
+    <textarea id="example-textarea" rows="10" cols="60"></textarea><br>
+    <input type="button" value="Button Input">
+    <h2>Object Oriented Programming</h2>
+    <p>Object oriented programming is an approach to programming that involves separating code into objects with properties and methods. This 
+        allows for reusability of code, as well as making code easier to modify without breaking other, supposedly unconnected parts of code.
+        There are three main concepts to object-oriented programming, which are encaspulation, polymorphism, and inheritance.
+    </p>
+    <p>Ecapsulation is the process of making sure than an object's inner workings are hidden, leaving only the necessary parts exposed. Basically,
+        it means that the outside world doesn't have to know how something works, only that it <i>does</i> work.
+    </p>
+    <p>Polymorphism is when the same process can be used for different objects. Polymorphism allows for multiple objects to share a method, but
+        also have the ability to override shared methods with more specific instructions.
+    </p>
+    <p>Inheritance allows for objects to build on one base object, implementing their own, new methods and properties. This functions similarly
+        to how upgrading to a newer version of something works; there's a base to work with that doesn't vary between models, but some models have
+        more features that enhance the base.
+    </p>
+    <p>Classes are the blueprint for an object. Each object is a new instance of the class, and inherits the methods and properties of the class.
+        Objects can be built using constructor methods. A constructor method looks something like this:
+    </p>
+    <p>const Dice = function(sides = 6) {<br>
+    this.sides = sides;<br>
+    this.roll = function() {<br>
+        return Math.floor(this.sides * Math.random() + 1)<br>
+        }<br>
+    }<br></p>
+    <p>Now that you have a constructor for an object, you can make a new one whenever you want by doing something like const redDice = new Dice or
+        const whiteDice = new Dice(4). In the second example here, adding the parentheses to the constructor allows us to override the default
+        amount of sides.
+    </p>
+    <p>There are several ways to use built-in constructors. You can build a new object in several ways, either using a literal or a constructor.
+        A literal looks like this: const literalObject = {}, whereas a constructor works like this: constructedObject = new Object(). This also
+        works with arrays. The easier way to construct an array is to use a literal away, but using a constructor works just as well. Using an 
+        array constructor (new Array()) has some strange behavior; for example, using just a single argument sets the length of the array,
+        instead of an array with the argument as the first element. Because of that, making an array that has a single value of a decimal number
+        also doesn't work.
+    </p>
+    <p>Class declarations work the same way as constructor functions, but look more like what class-based programming languages look like.</p>
+    <p>Static methods are called directly by a class, instead of by instances of a class.</p>
+    <p>Every class has a prototype property that is shared by all instances of the class. The prototype property returns an object. All instances
+        of the class share the properties and methods of its prototype. You can see the prototype of a class by using Object.getPrototypeOf(object).
+        The prototype is also considered to be "live", so any new property or method added to the prototype will be automatically inherited by any
+        instances of the class, even those that existed before the addition. Prototypes are handy for making multiple objects that share many methods, 
+        but don't have all the same properties.
+    </p>
+    <p>An object can overwrite a prototype's properties or methods. For example, a prototype might have the property of name = 'Leo', but another
+        instance of the object could have the property name propery overwritten to be name = 'Raphael'. Overwritten properties take priority over
+        the same prototype property when used in methods.
+    </p>
+    <p>An object's methods are public by default in Javascript. This means that they can be queried directly and changed by assignment. Generally,
+        you want to avoid having something be public as much as possible, so that the values cannot be edited outside of the object. You can make
+        sure that something is private by paying attention to variable scope. Using getters and setters is a good way to keep things private,
+        allowing for things to be changed in a controlled way.
+    </p>
+    <p>An enumerable property is one that can be used in a for-in loop. It is considered good practice to have built-in functions be non-enumerable
+        and user-made functions be enumerable.
+    </p>
+    <p>You can use 'extends' to create a subclass or child of a class. The child class can then use the properties and methods from the parent using
+        the 'super' keyword.
+    </p>
+    <p>You can add new methods to primitive values, but this isn't considered good practice in Javascript.</p>
+    <p>Property descriptors are the property's attributes. These attributes are value, writable, enumerable, and configurable. When adding properties,
+        you can only set the property's value, but not any of its attributes. However, you can use object.defineProperty to set the properties of
+        an attribute.
+    </p>
+    <p>Using a getter and setter to define a property allows for things to work in a slightly different manner. It allows you to have much better
+        control over what is able to be set. For example, using a get/set method can allow an assignment to be only positive numbers, or only a
+        string.
+    </p>
+    <p>You can avoid using classes altogether by creating objects out of already created objects. The object constructor function has a method
+        called create, which can be used to create a new object. For example, const baby = Object.create(Human). The new 'baby' object will have
+        all the properties of the 'Human' object, thereby making Human the prototype of baby. You can initialize an object made using this 
+        method using newObject.init('value', 'value2').
+    </p>
+    <p>A mixin is a way of adding properties and methods of some objects to other objects without using inheritance. You do this by using
+        Object.assign(a,b). This does not create a new property, but instead points to the property of the other object. This is called a shallow
+        copy.
+    </p>
+    <p>If a method returns 'this', then its methods can be chained together to form a sequence of method calls that will be called one after the
+        other.
+    </p>
+    <p>bind(this) is used to set the value of 'this' in the function. When 'this' is provided as an argument to bind() while it's still in scope,
+        any reference to 'this' inside the function will be bound to the object calling the original method. You can also set 'this' by using for-of.
+        You could also use an arrow function, such as this.friends.forEach((friend) => {}).
+    </p>
+    <p>You are able to borrow methods by making a reference to another object's methods, making sure it isn't invoked. You use something like
+        const method = object.method, then method.call(object2). You can borrow array methods this way, as well.
+    </p>
+    <p>Object oriented programming is great, but it should also be used with care. Inheritance can get messy when it comes to this style of 
+        programming. Keeping objects and classes small and only doing one thing is a good way to overcome this issue.
+    </p>
+    <h2>Modular Javascript</h2>
+    <p>A module is a piece of self-contained programming that provides functions and methods that can be used in other files and modules. This
+        helps the code to be reusable and maintainable. Coupling code means that there are two seperate parts that require each other to be able
+        to run properly, so modifying one means you need to modify the other. It's considered good practice to keep code as loosely coupled as
+        possible, as it would allow for the most flexibility.
+    </p>
+    <p>Functions and variables can be imported from modules. In order to do this, you have to make sure that you use export{} and import {} from 
+        file. One way of exporting things is using default export, which allows for a variable to be used without having to be explicitly named.
+        This improves readability.
+    </p>
+    <p>You can assign aliases to imported modules, and they don't have to match the name of what is being imported.</p>
+</body>
+</html>
