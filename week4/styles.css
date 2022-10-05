@@ -1,0 +1,20 @@
+#board {
+    width: fit-content;
+    position: absolute;
+    left: 30%;
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 200px);
+    grid-gap: 1px;
+    background-color: black;
+}
+
+#board div {
+    background-color: white;
+}
+
+.data-cell {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 100px;
+    text-align: center;
+}
