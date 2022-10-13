@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 330 Week 5</title>
+</head>
+<body>
+    <a href="\index.html">Go Back</a>
+    <h1>Notes</h1>
+    <h2>Errors, Exceptions, and Warnings</h2>
+    <p>There are generally three types of errors; system error, programmer error, and user error. A system error occurs when there is a
+        problem with the system or external devices that the program interacts with. These are generally difficult for the programmer to
+        fix, as they do not work directly with whatever is causing the root of the problem. Programmer errors happen when the program 
+        contains incorrect syntax or faulty logic. Programmer errors are the responsibility of the programmer to resolve. User errors
+        happen when the user has entered data incorrectly, in a way the program can't handle. We can avoid user errors by making the program
+        able to handle as many errors as it can.
+    </p>
+    <p>An exception is an error that produces a return value which the programmer can use to resolve the error. For example, trying to call
+        a method that does not exist will result in an exception. An exception also produces what is called a stack trace. A stack trace works
+        back to where the error originated, which is helpful when you aren't exactly sure where the error occured.
+    </p>
+    <p>A warning occurs when there's an error that isn't enough to cause the program to crash. While an error that doesn't make the program crash
+        doesn't sound like a big deal, it should still be amended as quickly as possible, as it could made the program continue to run
+        incorrectly.
+    </p>
+    <p>When a runtime error occurs in a browser, the HTML will still appear, but the Javascript in the background with stop functioning.
+        If a warning occurs, Javascript will continue to run, but it will likely not function correctly. Obviously, you will want to debug 
+        and test as much as you can so that this doesn't happen.
+    </p>
+    <h2>The Importance of Testing and Debugging</h2>
+    <p>Because of the way Javascript works, it doesn't always alert the user to errors in the program, and continues to run incorrectly. This
+        can be called "failing silently" and is something to avoid. Failing silently means errors are harder to trace and fix.
+    </p>
+    <h2>Strict Mode</h2>
+    <p>Strict mode is a feature that allows for programmers to spot errors more quickly. It also throws exceptions when sloppy code practices
+        are used, therefore enforcing cleaner, better quality code. To use strict mode, all one must do is add a string at the beginning of
+        their Javascript; 'use strict'. This will be picked up by any Javascript engine that supports strict mode, and will be ignored by
+        engines that do not support it.
+    </p>
+    <p>
+        In addition to using strict mode for an entire file, you can also use strict mode for only the contents
+        of a function by putting 'use strict' at the beginning of whatever is inside the function. The recommended way to invoke strict mode is
+        to place it at the beginning of what is called a self-invoking function, which contains all code. This is good practice because placing 
+        'use strict' at the beginning of a file will enforce strict mode on <i>all</i> code in the file, including imported code that might not
+        have been written in strict mode. Using a self-invoking function ensures that only your code is written in strict mode.
+    </p>
+    <h2>Linting Tools</h2>
+    <p>
+        Linting tools are a way of testing the quality of Javascript code beyond the use of strict mode. Linting tools look for sloppy practice,
+        syntax errors, and certain style conventions like indenting. They are good tools for enforcing a style guide, therefore making sure that
+        everyone on a team is following the same conventions. There are several ways to implement a linting tool; you can paste your code into an
+        online tool, use a text editor plugin, or install linting software directly to your computer.
+    </p>
+    <h2>Feature Detection</h2>
+    <p>
+        Javascript has many APIs that not all browsers will support. A programmer can make sure that the browser supports any API they might be 
+        using by using an if statement before using anything from the API. This will ensure that no errors occur if the browser doesn't support
+        the method being used.
+    </p>
+    <h2>Debugging in the Browser</h2>
+    <p>
+        Debugging in the process of finding where bugs occur, then dealing with them. Many times, the place where the bug occurs is not where it 
+        originated, so you will have to run different parts of the code to figure out where the bug originated. Using breakpoints is a critical
+        step in figuring out where the bug originates. By setting a breakpoint, you are then able to execute code line by line, allowing you to
+        see where a bug starts.
+    </p>
+    <p>One of the most basic forms of debugging in Javascript is to use an alert to show dialog at certain points in the code. An alert stops the
+        code from running until the alert is dismissed and is an effective breakpoint when you need to check that a variable has the expected 
+        value. for example.
+    </p>
+    <p>
+        Another good way of debugging is to use console.log. This is one that I've used very often to make sure that things are running as they
+        should.
+    </p>
+    <h2>Debugging Tools</h2>
+    <p>Most modern browsers have a built-in debugging tool that allows you to set breakpoints that will pause the code. You can then see the
+        values of all the variables and modify them as needed. You can also use the debugger command to make the browser's debugging function
+        kick in. 
+    </p>
+    <h2>Error Objects</h2>
+    <p>
+        An error object can be created by the host environment when an exception occurs, or can be created using a constructor. This constructor
+        function takes a parameter that is then used as an error message. There are seven more error objects; EvalError, which is used mostly
+        in backwards compatability and was used to identify errors in the global eval() function, RangeError, when a number is outside an 
+        allowable range of values, ReferenceError, when a reference is made to a non-existent item, SyntaxError, when there is a problem with the
+        program's syntax, TypeError, when there is an error in the type of value used, URIError, when there is a problem encoding or decoding the
+        URI, and InternalError, when an error with the Javascript engine occurs.
+    </p>
+    <p>
+        These errors can also be used to create custom error objects, and therefore custom error messages.
+    </p>
+    <h2>Throwing Exceptions</h2>
+    <p>It's possible to throw your own exceptions using the throw statement. This will cause a program to stop. It is considered best practice to
+        throw an error with a message.
+    </p>
+    <h2>Exception Handling</h2>
+    <p>
+        Handling exceptions is good practice during production, as it makes the program more polished. Exceptions can be identified while remaining
+        hidden from the user, and from there, can be either dealt with or ignored. Handling exceptions keeps the program running. A good way to
+        handle exceptions is to use try-catch-finally. Try gives the program something to start with, catch tells what to do in the event that the
+        code in the try statement throws an exception, and finally tells the program what to do after both the try and catch statements are done.
+    </p>
+    <h2>Tests</h2>
+    <p>
+        Testing is an important, and sometimes overlooked, part of programming. Writing good tests ensures that the code is less likely to break,
+        and errors are dealt with early on. In the same vein, test-driven development (TDD) is the process of writing tests before the actual code,
+        then adding code to be tested, and polish the tests to make it more readable and efficient. In TDD, the code is tested at every stage to
+        ensure that it works. TDD is the best practice, in theory, but is not often used in favor of time management.
+    </p>
+    <p>
+        Testing frameworks provide structure to write meaningful tests and run them, saving the programmer the tedium of having to write each test
+        by hand. One popular testing framework is called Jest, and was made by Facebook. Running Jest will return the results of whatever tests
+        are being run.
+    </p>
+</body>
+</html>
