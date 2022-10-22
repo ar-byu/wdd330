@@ -1,6 +1,8 @@
 // This module takes care of the creation of tasks, as well as the completion and delete buttons for each task
 
 //import {setLocalStorage} from './ls.js'
+import {storeTask} from './ls.js'
+import { getNumberOfTasks } from './utilities.js';
 
 const tasks = []
 const taskList = document.getElementById('task-list');
@@ -22,14 +24,15 @@ function newTask() {
         completed: false,
     }
 
-    storeTask(newItem)
+    storeTask(newItem, tasks)
 
     let completedButton = createComplete(newItem)
     newLI.appendChild(completedButton)
 
-    let deleteButton = createDelete()
+    let deleteButton = createDelete(newItem)
     newLI.appendChild(deleteButton)
     taskList.appendChild(newLI)
+    getNumberOfTasks()
 }
 
 function displayStoredTask(task) {
@@ -38,20 +41,14 @@ function displayStoredTask(task) {
     if (task.completed === true) {
         newLI.setAttribute('class', 'complete')
     } else {
-        newLI.setAttribute('class', 'complete')
+        newLI.setAttribute('class', 'incomplete')
     }
-    let completedButton = createComplete(newLI)
+    let completedButton = createComplete(task)
     newLI.appendChild(completedButton)
 
-    let deleteButton = createDelete()
+    let deleteButton = createDelete(task)
     newLI.appendChild(deleteButton)
     taskList.appendChild(newLI)
-}
-
-function storeTask(newItem) {
-    tasks.push(newItem)
-    console.log(tasks)
-    localStorage.setItem('toDoList', JSON.stringify(tasks))
 }
 
 // Creates a completion button
@@ -69,34 +66,42 @@ function createComplete(newItem) {
 
 // Creates a delete button
 
-function createDelete() {
+function createDelete(task) {
     let deleteButton = document.createElement('button')
     deleteButton.setAttribute('class', 'delete-button')
     deleteButton.innerHTML = 'Delete'
 
     deleteButton.addEventListener('click', () => {
-        deleteTask(deleteButton)
+        deleteTask(deleteButton, task)
     })
     return deleteButton
 }
 
 // Function to mark a task as complete
 
-function markComplete(button, newItem) {
-    const identifier = newItem.id
+function markComplete(button, item) {
+    const identifier = item.id
+    const tasks = JSON.parse(localStorage.getItem('toDoList'))
     const index = tasks.findIndex(task => task.id === identifier)
     tasks[index].completed = true
     button.parentElement.removeAttribute('class', 'incomplete')
     button.parentElement.setAttribute('class', 'complete')
     localStorage.setItem('toDoList', JSON.stringify(tasks))
+    getNumberOfTasks()
 }
 
 // Function to delete a task
 
-function deleteTask(button, task) {
-    button.parentElement.remove()
-    tasks.pop(task)
+function deleteTask(button, item) {
+    const identifier = item.id
+    const tasks = JSON.parse(localStorage.getItem('toDoList'))
+    const index = tasks.findIndex(task => task.id === identifier)
+    if (index >= 0)
+    {button.parentElement.remove()
+    tasks.splice(index, 1)
     localStorage.setItem('toDoList', JSON.stringify(tasks))
+    getNumberOfTasks()
+    }
 }
 
 // Exports necessary functions

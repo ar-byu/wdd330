@@ -1,8 +1,8 @@
 // This module handles the sort buttons and the add button. It also displays the amount of tasks in the list.
 
 // Imports necessary variables and functions
-import {newTask} from './ToDos.js';
-import { renderTasks } from './ls.js';
+import {newTask, displayStoredTask} from './ToDos.js';
+//import { renderTasks } from './ls.js';
 
 // Initializes variables for each button, the task list, and the place where the amount of tasks will be displayed
 const addTaskButton = document.getElementById('add-task')
@@ -13,8 +13,14 @@ const taskList = document.getElementById('task-list')
 const numberOfTasks = document.getElementById('tasks-left')
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Got to here") 
-    renderTasks()
+    const tasks = localStorage.getItem('toDoList')
+    getNumberOfTasks()
+    if (tasks)
+        {let toDoItems = JSON.parse(tasks)
+        toDoItems.forEach(task => {
+        displayStoredTask(task)
+        })
+    }
 })
 
 
@@ -74,6 +80,16 @@ showFinishedTasks.addEventListener('click', () => {
 
 // Shows the amount of tasks in the list
 
-if (taskList.length === 0) {
-    numberOfTasks.textContent = '0'
-} else {numberOfTasks.textContent = document.querySelectorAll('.incomplete').length}
+export function getNumberOfTasks() {
+let allTasks = JSON.parse(localStorage.getItem('toDoList'))
+let activeTasks = 0
+allTasks.forEach(task => {
+    if (task.completed === false) {
+        activeTasks += 1
+    }
+})
+
+if (activeTasks === 1) {
+    numberOfTasks.textContent = `1 task left`
+} else
+numberOfTasks.textContent = `${activeTasks} tasks left`}

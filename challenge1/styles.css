@@ -1,0 +1,55 @@
+body {
+    height: 80%;
+    width: 40%;
+    border: 1px solid black;
+    border-radius: 15px 15px;
+    position: absolute;
+    left: 30%;
+}
+
+ul li, p, span, button {    
+    font-size: larger;
+    font-family: 'Dancing Script', cursive;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+}
+
+main {
+    height: 75%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: lightblue;
+    padding-top: 2%;
+}
+
+.complete {
+    color: darkgreen;
+}
+
+.incomplete {
+    color: darkred;
+}
+
+ul li {
+    list-style: none;
+    margin-top: 2%;
+}
+
+.completed-button, .delete-button {
+    margin-left: 2%;
+}
+
+
+
+footer input {
+    width: 75%;
+    margin: 2%;
+}
+
+footer button {
+    width: 15%;
+}
+
