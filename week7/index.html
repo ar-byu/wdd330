@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD330 Week 7</title>
+</head>
+<body>
+    <a href="\index.html">Go Back</a>
+    <h1>Notes</h1>
+    <h2>Function Properties and Methods</h2>
+    <p>Because functions are "first-class" objects in Javascript, they can have their own methods and properties. As an example, all functions 
+        have a length property that returns the number of parameters the function has. Another example would be the "call" method, which calls a
+        function and provides arguments.
+    </p>
+    <p>You can set custom properties of a function the same way you set properties of an object; function.property = customProperty.</p>
+    <p>Memoization is the process of saving the return of something in a cache property, which can then be used later on. If we were to save 
+        multiple items in the cache property, it would return as an array.
+    </p>
+    <h2>Immediately-Invoked Function Expressions (IIFE)</h2>
+    <p>An IIFE is an anonymous function that is invoked as soon as it's defined. This is achieved by placing parentheses at the end of a function
+        declaration, as functions are invoked via parentheses. This is a useful way of performing a task while keeping its necessary variables
+        within the scope of a function.
+    </p>
+    <h2>Temporary Variables</h2>
+    <p>Temporary variables are variables inside an IIFE that do not exist after the function is invoked. This can be used to temporarily redefine
+        global variables without breaking the code or causing errors.
+    </p>
+    <h2>Initialization Code</h2>
+    <p>An IIFE can be used to set up initialization code which won't be needed later. As the code is only used once, there would be no need to
+        create a reusable, named function for it, and the variables in the function would all be temporary. An IIFE would be invoked once, when
+        the page loads, and will set up any variables, objects, and event listeners.
+    </p>
+    <h2>Safe Use of Strict Mode</h2>
+    <p>As mentioned in Week 5, strict mode is useful for keeping code organized, but using strict mode on all of the code might not be great
+        when working with code from multiple people. Therefore, putting all your code in an IIFE and have that function use strict is preferred.
+        This ensures that all of your code can be in strict mode without strict mode messing with anyone else's code.
+    </p>
+    <h2>Self-Contained Code Blocks</h2>
+    <p>An IIFE can be used to enclose a block of code inside its own private scope so that it doesn't interfere with the rest of the code. Using
+        IIFEs in this way means that code can be added or removed independently, therefore improving organization and maintainability.
+    </p>
+    <h2>Functions That Rewrite Themselves</h2>
+    <p>Because of the dynamic nature of Javascript, functions can call themselves, define themselves, and redefine themselves. This is done by
+        assigning an anonymous function to a variable with the same name as a function. Calling the function the first time will run the code it
+        was initially given, and then redefine itself, so that every time it's called again, it will run the secondary code instead of the initial
+        code.
+    </p>
+    <p>If the function is assigned to another variable before the function is redefined, the second variable will keep the initial code and will
+        never be redefined.
+    </p>
+    <p>If any properties are set when the function is defined, these properties will be lost when the function is redefined. This is called the 
+        "Lazy Definition Pattern" and is often used when initialization is required the first time it is invoked.
+    </p>
+    <h2>Init-Time Branching</h2>
+    <p>Init-time branching is a technique that can be used along with feature detection in order to create functions that redefine themselves. This
+        enables functions to work more efficiently in a browser and avoid checking for features every time they're invoked. For example, you could
+        write a function that checks whether or not something is supported, and then execute code appropriately.
+    </p>
+    <h2>Recursive Functions</h2>
+    <p>A recursive function is a function that invokes itself until a condition is met. For example, a function that invokes itself repeatedly until
+        the number it returns is 1.
+    </p>
+    <h2>Event-Driven Asynchronous Programming</h2>
+    <p>Callbacks (a function passed to a function as an argument) can be used to facilitate event-driven asynchronous programming. Because Javascript
+        is a single-threaded environment, only one piece of code will ever be processed at a time. Instead of waiting for an event to occur, a 
+        callback can be created which is invoked when an event happens. This causes the code to run out-of-order, or asynchronously. By using a 
+        callback in this way, we can ensure that waiting for these tasks won't hold up the rest of the program.
+    </p>
+    <p>Overuse of callbacks can result in what is called "spaghetti code"; a large number of nested code blocks that become unreadable. As such,
+        callbacks should be used wisely.
+    </p>
+    <h2>Promises</h2>
+    <p>A promise represents the future result of an asynchronous operation. These help to simplify the process of asynchronous operations.</p>
+    <p>When a promise is created, it calls an asynchronous operation and is said to be pending. It remains in this "unsettled" state until the
+        operation is complete, after which it becomes "settled". A settled promise can either result in a "resolved" outcome or a "rejected"
+        outcome. A resolved outcome means the code was executed successfully, and a rejected outcome means an error occured somewhere.
+    </p>
+    <p>Creating a promise looks like this:</p>
+    <p>const promise = new Promise( (resolve, reject) => {<br>
+        // initialization code goes here<br>
+        if (success) {<br>
+            resolve(value);<br>
+        } else {<br>
+            reject(error);<br>
+        }<br>
+    });
+    </p>
+    <p>Once a promise has been settled, the then() method can be used to deal with the outcome. For example,</p>
+    <p>login(userName)<br>
+        .then(user => getPlayerInfo(user.id))<br>
+        .then(info => loadGame(info))<br>
+        .catch( throw error)</p>
+    <h2>Async Functions</h2>
+    <p>Functions can be specifically written to be asynchronous by preceding the declaration with "async". Then you precede an asynchronous function
+        with the keyword "await", which wraps the return value in a promise which can then be assigned to a variable.
+    </p>
+    <h2>Generalized Functions</h2>
+    <p>Callbacks can be used to build more generalized functions. Instead of having a lot of specific functions, one function that accepts a 
+        callback can be written. 
+    </p>
+    <h2>Functions That Return Functions</h2>
+    <p>Sometimes, functions can return functions. This can allow for one function to be assigned to multiple variables and allow different parameters.
+        For example, a "greeter" function which can be assigned to different languages.
+    </p>
+    <h2>Closures</h2>
+    <p>Closures are a powerful tool, but can be hard to understand at first. A closure is a reference to a variable created inside the scope of
+        another function, but can be referenced outside of the function. An example wout be something like this:
+    </p>
+    <p>function closure() {<br>
+        const a = 1.8;<br>
+        const b = 32;<br>
+        return c => c * a + b;<br>
+        }<br>
+        const toFahrenheit = closure();<br>
+        toFahrenheit(30);    
+    </p>
+    <p>Closures not only have access to variables declared in the parent function's scope, but they can also change those variables.</p>
+    <h2>Generators</h2>
+    <p>Generators are special functions used to produce iterators that maintain the state of a value. A generator function is defined by using an
+        asterisk after the word "function". Calling a generator function doesn't run any code, but instead returns a new Generator object which
+        can be used as an iterator that implements a next() method that returns a value every time the next() method is called.
+    </p>
+    <h2>Functional Programming</h2>
+    <p>Functional programming is another programming paradigm, like object-oriented programming and procedural programming. A key aspect of 
+        functional programming is the use of pure functions. A pure function is a function that adheres to the following rules:
+    </p>
+    <ol>
+        <li>The return value of a pure function should only depend on the values provided as arguments. It doesn't rely on values from 
+            somewhere else in the program.</li>
+        <li>There are no side-effects. A pure function doesn't change any values or data elsewhere in the program. It only makes non-destructive 
+            data transformations and returns new values, rather than altering any of the underlying data.</li>
+        <li>Referential transparency. Given the same arguments, a pure function will always return the same result.</li>
+    </ol>
+    <p>Therefore, a pure function would have at least one argument and a return value. Pure functions help to make functional programming more
+        concise and predictable. Referential transparency makes pure functions easy to test, as they can be relied on to return the same values
+        when given the same arguments. Any return values can also be cached. There are no surprise dependencies, and therefore fewer bugs in the
+        code. By only performing one task, pure functions are more flexible, as they can be used as building blocks for many different situations,
+        instead of being tightly coupled with one particular operation. This improves readability, maintainability, and modularization.
+    </p>
+    <h2>Higher-Order Functions</h2>
+    <p>Higher order functions are functions which can accept another function as an argument, return a function, or both. Closures are used
+        extensively in higher-order functions as they allow us to create a generic function that can be used to create and return more specific
+        functions as necessary. This is another core tenets of functional programming.
+    </p>
+    <h2>Currying</h2>
+    <p>Currying, named after logician Haskell Curry, is the process of partially applying functions. A function is said to be curried when not
+        all arguments have been supplied to the function, so it returns another function that retains the arguments already provided, and expects
+        the arguments that weren't given when the original function was called. A final result is only returned when all arguments have been
+        provided. Currying relies on higher-order functions that are able to return partially applied functions. All curried functions are 
+        higher-order functions, but not all higher-order functions are curried.
+    </p>
+    <h2>Ajax</h2>
+    <p>Ajax is a technique that allows web pages to communicate asynchronously with the server, and dynamically updates the page without reloading.
+        This enables data to be sent and received in the background, as well as portions of a page to be updated in response to user events while
+        the rest of the program continues to run. Ajax stands for Asynchronous Javascript XML.
+    </p>
+    <h2>Clients and Servers</h2>
+    <p>The internet can be separated into two parts; clients and servers. A client, such as a web browser, will request a resource, like a web page,
+        from a server, which processes the request and sends back a response. Javascript was created as a client-side scripting language, but with
+        things like Ajax, Javascript can also request resources from the server on behalf of the client. The requested resources are usually small,
+        like bits of HTML or JSON, instead of full web pages. As such, a server is required when requesting things with Ajax.
+    </p>
+    <h2>The Fetch API</h2>
+    <p>The Fetch API is the current living standard for requests and sending data asynchronously. This means that the specification is being 
+        developed "in the wild". This means that, despite being widely used, it's still subject to change.
+        The Fetch API provides a global fetch() method that only
+        has one mandatory argument, which is the URL of the resource being retrieved. It can then have a then() or catch() statement which handles
+        whatever needs to happen after the resource is retrieved.
+    </p>
+    <h2>Response Interface</h2>
+    <p>The Fetch API introduced the Response interface, which deals with the object that's returned when a promise is fulfilled. Response objects
+        have several properties which allow us to process the response effectively. For example, the "ok" property will check to see if the
+        response was successful. There are also many methods which can be used. The redirect method can be used to redirect to another URL. 
+        Currently, there is no support for redirect() in any browser. The text() method takes a stream of text from a response, reads it, then 
+        returns a promise that resolves into a USVString object which can be treated as a string. The blob() method reads a file of raw data, such
+        as an image or spreadsheet, and returns a promise that resolves in a blob object.
+    </p>
+    <p>JSON is the most common form of Ajax responses. The json() method is used to deal with these by transforming a stream of JSON data into a
+        promise which resolves into a Javascript object.
+    </p>
+    <p>You can create a response object, if needed, by using new Response().</p>
+    <h2>Request Interface</h2>
+    <p>We can get more control over the request being made by providing a Request object as an argument. This allows for a number of options to be
+        set about the request. Request objects are created using the Request() constructor, and have these properties: url, method, headers, mode,
+        cache, credentials, and redirect.
+    </p>
+    <h2>Headers Interface</h2>
+    <p>HTTP headers are used to pass on any additional information about the request or response. Typical information contained in headers includes
+        the file-type of the resource, cookie information, authentication information, and when the resource was last modified. A Header object is
+        made with the Header() constructor and can be provided with an optional argument containing any initial header values. A Headers object 
+        has several properties and methods that can be used to access information about the headers, as well as edit the header information. These
+        properties and methods are:
+    </p>
+    <ul>
+        <li>has()</li>
+        <li>get()</li>
+        <li>set()</li>
+        <li>append()</li>
+        <li>delete()</li>
+    </ul>
+    <p>We can combine the headers, request, and response interfaces to set up a URL before calling the fetch() method.</p>
+</body>
+</html>
