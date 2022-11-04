@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 330 Week 8</title>
+</head>
+<body>
+    <a href="\index.html">Go Back</a>
+    <h1>Notes</h1>
+    <h2>Cookies</h2>
+    <p>A cookie is a name-value pair associated with a given website and stored on the computer that runs the browser. Once a cookie is set by
+        a website, all future page requests to that site have access to that cookie until the cookie expires or becomes out of date. Websites
+        cannot access cookies not set by themselves, making cookies more secure than most people think.
+    </p>
+    <p>A cookie's life cycle is as follows:
+        <ol>
+            <li>A web browser requests a URL that corresponds to a PHP script. Within that script is a function to set a cookie.</li>
+            <li>The page produced by the PHP script is sent back to the browser, along with an HTTP set-cookie header that contains the name
+                and value of the cookie to be set.
+            </li>
+            <li>When it receives this header, the browser creates and stores a value as a cookie with the given name.</li>
+            <li>Subsequent page requests to that website contain an HTTP cookie header that sends the name/value pair to the script requested.</li>
+            <li>Upon receipt of a page request with a cookie header, PHP automatically creates an entry in the $_COOKIE array with the name of
+                the cookie and its value.
+            </li>
+        </ol>
+    </p>
+    <p>The PHP setcookie function lets you set a variable that will be automatically set by subsequent page requests from the same browser.</p>
+    <p>The setcookie function must be called before any of the actual page content is set, or else it will cause an error.</p>
+    <p>The only required parameter for setcookie is the cookie's name. However, calling setcookie with only the name will delete the cookie that's
+        stored in the browser, if it exists. The value parameter allows you to create a new cookie or modify an existing one.
+    </p>
+    <p>By default, cookies are stored in the browser, and thus will continue to be sent with page requests until the browser is closed. In
+        order to keep a cookie after the browser is closed, you need to set the expiryTime parameter to specify the number of seconds from
+        January 1, 1970 to the time at which you want to automatically delete the cookie. The current time in this format can be obtained using
+        the PHP time function. To set a cookie to expire in one hour, you could use time() + 3600. To delete a cookie with a preset expiry time,
+        change the expiry time to represent a point in the past.
+    </p>
+    <p>The path parameter of the setcookie function lets you restrict cookie access to a certain path on the server. For example, you could use
+        '/admin/' as a cookie path to limit use of that cookie to only admin directories.
+    </p>
+    <p>The domain parameter has a similar purpose to parameter. It restricts the cookie's access to a given domain. By default, a cookie will be
+        returned only to the host it was originally sent from. However, sometimes you have several host websites for a web presence (for example,
+        google.com and images.google.com). To create a cookie that's accessible by pages on both servers, you would set the domain parameter to
+        '.google.com'.
+    </p>
+    <p>The secure parameter, when set to 1, indicates that a cookie should only be sent with page requests that happen over a secure connection;
+        a URL that starts with https instead of http.
+    </p>
+    <p>The httpOnly parameter, when set to 1, tells the browser to prevent Javascript code from seeing the cookie being created.</p>
+    <p>While all parameters but name are optional, you have to specify values for earlier parameters in order to specify values for later 
+        parameters. In order to omit parameters that require a value, you can use '' for string parameters and 0 for numeric parameters.
+    </p>
+    <p>Browsers place a limit on the number and size of cookies allowed per website. Some browsers start deleting old cookies after 20 cookies
+        have been set, and others start rejecting new cookies after 50 cookies have been set. Browsers also enforce a maximum combined size for
+        all websites, so a particularly cookie-heavy website may delete cookies from your own site. As such, cookies should be used sparingly.
+    </p>
+    <h2>PHP Sessions</h2>
+    <p>Cookies are inappropriate for storing large amounts of data. For example, if an e-commerce site uses cookies in order to store a visitor's
+        cart, the larger the order is, the more likely it will clash with the browser's cookie limitations. PHP sessions were developed to solve
+        this issue. Instead of storing all data as cookies, sessions allow you to store data in the web server. The only thing that is stored in 
+        the browser is a cookie containing the visitor's unique session ID. This variable is what the site's PHP watches for on subsequent page
+        requests, and uses it to load the stored data associated with that session.
+    </p>
+    <p>Unless otherwise specified, a PHP session automatically sets a cookie in the user's browser that contains the session ID. The browser
+        sends that cookie, as well as every other request for a page within the site, so that the PHP can determine the potentially numerous 
+        sessions in progress that the requests belong to. Using a set of temporary files that are stored on the web server, PHP keeps track of
+        the variables that have been registered in each session, as well as their values.
+    </p>
+    <p>Before using the session-management features in PHP, you should ensure that the relevent section of your php.ini file has been set up
+        properly. If you're using an all-in-one package like XAMPP or MAMP, or a server that belongs to your web host, you can usually assume that
+        this has been done for you. Otherwise, you need to open your php.ini file and look for the section marked [Section]. Beneath it, you will
+        find about 20 options. You'll want to check the session.save_handler, session.save_path, and session.use_cookies options.
+    </p>
+    <p>To tell PHP to look for a session ID, or to start a new session, you simply call the session_start() function. If an existing session ID
+        is found when this function is called, PHP restores the variables that belong to that session. Since this function attempts to create a
+        cookie, it must come before any page content is sent to the browser, just as we saw for setcookie.
+    </p>
+    <p>To create a session variable that will be available on all pages in the site when accessed by the current user, set a value in the
+        special $_SESSION array. For example, the following variable will store a variable called 'password' in the current session:
+        $_SESSION['password'] = 'mypassword'; <br>
+        To remove a variable from the current session, use PHP's unset function: unset($_SESSION['password']);<br>
+        If you want to end the session and delete all registered variables in the process, clear all stored values and use session_destroy:
+        $_SESSION = array(); session_destroy();
+    </p>
+    <h2>Access Control</h2>
+    <p>One of the most common reasons for building a database-driven website is that it allows the site owner to update the site from any web
+        browser. However, because there are hackers, you also need to consider the security of your administration pages. Requiring username
+        and password authentication is the most basic forms of securing an administration area. There are two ways to do this: configuring your
+        web server software to require a valid login for the relevant pages, or using PHP to prompt the user to check the login credentials as
+        appropriate.
+    </p>
+    <p>If you have access to your web server's configuration, the first option is often the easiest to set up, but the second option is far more
+        flexible. With PHP, you can develop your own login form, even embed it into the layout of the site if you want. PHP also makes it easy to
+        change the credentials required to gain access, or manage a database of authorized users, each with their own credentials and privileges.
+    </p>
+    <p>Access control is best accomplished using a Model-View-Controller approach.</p>
+    <h2>Canvas API</h2>
+    <p>The HTML Canvas API allows us to use Javascript to draw on the webpage. This can improve site performance by reducing the need to retrieve
+        images off the network. Canvas can be used to modify images and videos, as well as draw on the page.
+    </p>
+    <p>The first step to using this API is creating a canvas element using the '< canvas >' '< /canvas >' tags (without the spaces). You can then
+    access the canvas by using DOM manipulation.</p>
+    <p>You then need to set up the canvas context. This is where the drawing is rendered. You can do this by calling the getContext method, like
+        this: let context = canvas.getContext('2d')
+    </p>
+    <p>In order to paint the canvas, you need to assign properties to the canvas. For example, strokeStyle colors the border of the shape you want
+        to draw, and fillStyle colors the interior of the shape. Drawing a rectangle might look something like this:
+    </p>
+    <p>var canvas = document.getElementById("myCanvas");<br>
+        var context = canvas.getContext("2d");<br>
+        context.strokeStyle = "red";<br>
+        context.fillStyle = "rgba(0, 0, 255, 0.5)";<br>
+        context.fillRect(10, 10, 100, 100);<br>
+        context.strokeRect(10, 10, 100, 100);</p>
+    <p>Canvas operates on a coordinate system. The top left corner is 0,0 and the bottom right is the maximum number of pixels on the canvas. For
+        example, if the canvas was 200 x 200 pixels, the bottom right corner would be 200,200. 
+    </p>
+    <p>You can use CanvasGradient or CanvasPattern in order to fill a shape, too. You can create a CanvasPattern by calling the createPattern 
+        method. This method takes two parameters: the image to create the pattern with, and how the image should be repeated. The repeat value is a
+        string and is the same as the CSS repeat values.
+    </p>
+    <p>To create a CanvasGradient, you can either use createRadialGradient or createLinearGradient.</p>
+    <p>createLinearGradient's x0 and y0 represent the starting point of a gradient, and x1 and y1 represent the end point. After that, you have to
+        specify the color stops via addColorStop. This takes two parameters; offset and color. The offset is a number between 0 and 1, where 0 is
+        the beginning of the gradient and 1 is the end of the gradient, and the color is a string that can be a color name, hexadecimal value, 
+        RGB value, or RGBA value.
+    </p>
+    <p>You can draw objects that aren't rectangles or squares by using the beginPath method. For example, to draw a circle, you would call beginPath,
+        then the signature for the arc method; arc(x, y, radius, startAngle, endAngle, anticlockwise). It might look something like this:
+        context.arc(50, 50, 30, 0, Math.PI*2, true);<br>
+        X and Y represent where the arc's path should begin. This is the center of the circle. Radius is the distance from the center of the circle
+        to the edge. startAngle and endAngle represent the start and end angles along the circle's circumference that you want to draw.
+    </p>
+    <p>Once you have a path laid out, you can specify the stroke and fill of the object.</p>
+    <p>You can save a canvas drawing by using toDataURL. This creates a URL with an image in it. You can specify the file type to be PNG or JPG.
+    </p>
+    <p>You can draw an existing image to a canvas by using drawImage with the coordinates you want the image to be at.</p>
+    <p>You can manipulate an image by using getImageData. Once you have the image data, you can manipulate the pixels of that image. The 
+        getImageData method allows us to examine a small section of the canvas. It takes four parameters, corresponding to the coordinates of
+        the section corners. 
+    </p>
+    <p>There are security errors that come with using getImageData, however, these errors are unnecessary. Chrome and Firefox attempt to stop a
+        user on one domain from manipulating images on another domain. Therefore, in order to test pixel manipulation in Chrome and Firefox, you
+        will need to either use http://localhost/ or test it online.
+    </p>
+    <p>We can use a for loop to manipulate the value of each pixel in a section of canvas. In order to change a bunch of pixels to grayscale, for
+        example, you might use a for loop like this:<br>
+        for (var i = 0; i < imageData.data.length; i += 4)<br>
+        {    red = imageData.data[i];    <br>
+            green = imageData.data[i + 1];    <br>
+            blue = imageData.data[i + 2];    <br>
+            grayscale = red * 0.3 + green * 0.59 + blue * 0.11; <br>
+            imageData.data[i] = grayscale;     <br>
+            imageData.data[i + 1] = grayscale;      <br>
+            imageData.data[i + 2] = grayscale;  <br>
+        }<br>
+        context.putImageData(imageData, 0, 0);
+    </p>
+    <p>Manipulating video data functions similarly, but you have to iterate through each frame of the video.</p>
+    <p>Using a try/catch block, you can display a message on the screen if something goes wrong, like a security error.</p>
+    <p>The Canvas API in its current form lacks accessibility. This is something to be aware of when using the API.</p>
+    <h2>SVG</h2>
+    <p>SVG stands for scalable vector graphics. This is a file format that allows you to describe vector graphics using XML (eXtensible 
+        Markup Language). Vector graphics are nice because their image quality doesn't change when you scale an image. We can use SVGs to do
+        many of the things we can do with canvas, like drawing paths, shapes, text, gradients, and patterns.
+    </p>
+    <p>Drawing a circle in SVG is arguably easier than drawing a circle with canvas. The markup would look something like this, without the spaces:<br>
+        < svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" ><br>   
+        < circle cx="50" cy="50" r="25" fill="red" /><br>
+        < /svg ><br>
+        The viewBox attribute defines the starting location, width, and height of the image. The circle element defines a circle, with cx and cy
+        being the x and y coordinates of the center of the circle. The radius is represended by r, and fill defines the fill style. To view an
+        SVG file, you simply open it via the file menu in any browser that supports SVG.
+    </p>
+    <p>We can draw rectangles with SVG. The tag for this is < rect >, without the spaces. Its attributes are width, height, x, y, fill, stroke, 
+    and stroke width. Creating complicated shapes with SVG requires a lot more code. </p>
+    <p>It's significantly easier to use an image editor to help with creating complex SVG images, as opposed to writing all the code for it.</p>
+    <p>You can use an opensource Javascript library called Raphaël to make SVG drawing and animating a lot easier. Like with canvas, you can 
+        draw images to a container made with Raphaël. 
+    </p>
+    <p>Canvas is better for pixel manipulation. It is also not able to be accessed via the DOM, which makes it faster. This makes it better for
+        when you need to use a lot of animations. SVG has a more complete set of tools and is accessible via the DOM. However, since it is a file
+        type, you can't manipulate images the way you can manipulate pixels with canvas. If you need to paint pixels on a screen and have no 
+        concerns about the ability to retrieve and modify shapes, canvas is better. If you want to access and change specific assets of your 
+        graphics, SVG is more appropriate.
+    </p>
+    <h2>Drag and Drop</h2>
+    <p>The Drag and Drop API allows us to specify that certain elements are draggable, and then specify what happens when elements are dragged and
+        dropped onto other elements of the page. There are several steps you need to do in order to add drag and drop to your page:
+        <ol>
+            <li>Set the draggable attribute on any HTML you'd like to be draggable (Note: The draggable attribute is <i>NOT</i> a Boolean attribute, 
+                so it has to explicitly be set to "true")</li>
+            <li>Add an event listener for the dragstart event on any draggable HTML elements</li>
+            <li>Add an event listener for the dragover and drop events on any elements you want to accept dropped items</li>
+        </ol>
+    </p>
+    <p>DataTransfer objects are one type of object outlines in the Drag and Drop API. These objects allow us to set and get data about the elements
+        being dragged. Specifically, DataTransfer lets us define two pieces of information: the type of data we're saving of the draggable element,
+        and the value of the data itself.
+    </p>
+    <p>By default, elements on a page aren't set up to receive dragged items. In order to override the default behavior on a specific element,
+        we must stop it from happening. We do this with event listeners. The two events we need to monitor are dragover and drop. Dragover fires
+        when you drag an item over an element, and drop fires when you drop an item over it.
+    </p>
+</body>
+</html>
