@@ -50,3 +50,8 @@ button {
     margin-top: 10px;
 }
 
+@media only screen and (min-width: 1000px) {
+    li {
+        width: 101.7%;
+    }
+}
