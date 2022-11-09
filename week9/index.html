@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 330 Week 9</title>
+</head>
+<body>
+    <a href="\index.html">Go Back</a>
+    <h1>Notes</h1>
+    <h2>The Window and Browser Objects</h2>
+    <p>The browser object model is a collection of properties and methods that contain information about the browser and computer screen. It can
+        be used to find the dimensions of the screen, the browser being used (though this is unreliable), or create the infamous plague that is 
+        pop-up windows. We can use the window object for dialogue, like alert(), confirm(), and prompt(). A note about dialogues are that many 
+        browsers have a feature to disable dialogue from repeatedly appearing. They should be used sparingly and aren't always reliable.
+    </p>
+    <p>The window.navigator property can return the browser and operating system being used. However, this data can be modified, and even 
+        unmodified, it can be difficult to understand. It shouldn't be relied on. The window.location property contains information about the URL.
+        It can be rewritten, which will make the page reload with the new property. The window.protocol property returns what protocol is being
+        used, such as http versus https. The window.host describes the domain of the current URL <i>and</i> the port being used, if it isn't the
+        default. The window.hostname property describes the domain of the current URL without the port being used. The window.port property 
+        describes the port number being used and will return an empty string if the port number is not described in the URL. The window.pathname
+        property describes the path that follows the domain. The window.search property that starts with a "?" followed by the query string
+        parameters. It returns an empty string if there are no query string parameters. The window.hash property returns a string starting with 
+        "#" followed by a fragment identifier. It returns an empty string if there are no fragments. The window.location.origin property returns
+        a string that shows the protocol and domain where the current page originated from. The window.history property can access information 
+        about any previously visited pages.
+    </p>
+    <p>The window.open() method opens a new window and takes three parameters; the new window's URL, the new window's title, and the new window's
+        attributes. The window.close() method closes a window, assuming you have a reference to it. The window.moveTo() method moves the new 
+        window to a specified location using X and Y coordinates. (0,0) would be the top-left corner. The window.resizeTo() method changes the 
+        window's size as specified. Many browser block pop-up windows and sometimes disallow certain methods. There is almost always a better
+        alternative to using a pop-up.
+    </p>
+    <p>The screen object contains information about the screen the browser is displayed on. It can be used to find the height and width of
+        the screen the browser is being displayed on, the height and width of the screen without any operating system menus (for example, the 
+        Windows taskbar), and the color bit depth of a user's monitor. The screen object is particularly useful on mobile.
+    </p>
+    <p>The document object has properties and methods that deal with the page that has been loaded into the window. The document.write() method
+        writes a string of text to the page. If a page has already loaded, it will completely replace the current document. Adding HTML tags to 
+        a string made with the document.write() method, which makes it part of the DOM tree. Using the document.write() method is generally 
+        frowned on.
+    </p>
+    <p>The window.setTimeout() method takes a callback to a function and an amount of time in milliseconds. This will call a function after a
+        set amount of time. The window.clearTimeout() method clears a timeout. The window.setInterval() method works like the setTimeout() method,
+        but repeatedly invokes the callback function after every given number of milliseconds. The window.clearInterval() stops this.
+    </p>
+    <p>The setTimeout() and setInterval() methods can be used to make animations in a webpage. However, there are newer methods that make this
+        process more smooth. The window.requestAnimationFrame() method does much the same thing as the setInterval method, but it is more 
+        optimized to make better use of the browser's graphics-handling capability and makes sure an animation doesn't run when the tab is inactive,
+        resulting in smoother performance. We can stop the animation using the cancelAnimationFrame() method.
+    </p>
+    <h2>HTML5 APIs</h2>
+    <p>The data- attribute is a way of embedding data in a webpage using custom attributes that are ignored by the browser. They're also private
+        to the page, so they aren't meant to be used by an external service--their only purpose is to be used by Javascript. This makes them good
+        for adding data that can be used to access information about a particular element of the page. The name of these attributes can be decided
+        by the developer, but must follow a specific format. They must start with "data-", contain only lowercase letters, numbers, hyphens, dots,
+        colons, or underscores, and include an optional string value. For example, "data-max-length = '32'". Each element has a dataset property
+        that can be used to access any data- attribute it contains using node.dataset.attribute.
+    </p>
+    <p>The Web Storage API provides a key-value store on the client's computer, similarly to cookies. It has fewer restrictions, however, has more
+        storage capacity, and is generally easier to use. We have used this API before; localStorage and sessionStorage. There are a couple 
+        properties that can get information about items we update in storage. The key property tells us the key of the item, the newValue property
+        tells us the new value, the oldValue property tells us the previous value, and the storageArea property tells us if it is stored in local
+        or session storage.
+    </p>
+    <p>The Geolocation API is used to obtain the grographical position of a device. This means it can be used to get the user's exact location,
+        then link to nearby places or measure the speed of the user's movement. Because of privacy concerns, permission has to be given by the user
+        before accessing their location. If geolocation is enabled, it will be a property of window.navigator. This property has a method called
+        getCurrentPosition() that will return a position object to a specified callback function. The position object has a coords property with a
+        latitude and longitude property, speed property, altitude property, heading property, timestamp property, and accuracy property. The 
+        geolocation object also has a watchPosition() method that will call a callback function every time the position of a device is updated,
+        and a clearWatch() method that stops the callback being called.
+    </p>
+    <p>Web workers allow processes to be run in the background. To start, you need to create a new Worker() with a reference to a Javascript file.
+        If the file exists, it will be downloaded asynchronously. The worker will only start once the file has completely finished downloading. If
+        the file doesn't exist, an error is thrown. The variable that the new Worker is assigned to is how it is referenced in the main file, and
+        the keyword "self" is used to refer to the worker in the worker's file. The postMessage() method can be used to send a message and to 
+        start the worker. To post a message to the worker, you would use workerName.postMessage(), and to post a message from the worker, you
+        would use self.postMessage(). When a message is posted, it fired a message event, which can then be dealt with using an event listener.
+        When a worker has completed its task, it can be stopped in the main file using worker.terminate() or in the woker file using self.close().<br>
+        Similarly to this, the Service Worker API allows a worker script to run with the added benefit of being able to intercept network requests.
+        This allows you to take alternative action if the network is offline. They also allow access to push notifications and background syncing.
+        They require a secure connection (HTTPS) to avoid any malicious hijacking network requests.
+    </p>
+    <p>Websocket is a protocol that allows two-way communication with a server, also known as push messaging. This means that a connection is 
+        kept open and responses are pushed to the client as soon as they are received. 
+    </p>
+    <p>The Notifications API allows you to show messages using the system's notifications. This is usually a pop-up in the corner of the screen,
+        but it changes depending on the operating system. An advantage of system notifications is that they will still be displayed even if the
+        web page that calls them isn't the current tab. Before sending notifications, you need to get permission from the user. This can be done
+        using the requestPermission() method of a Notification global object. If set to granted, you can create a new notification with a 
+        constructor function. This will produce a system notification with whatever title you give it. The constructor function's first 
+        parameter is the title of the notification, and is required. The function also accepts a second parameter, which is an object of options.
+        These include body, which specifies any text that you want to appear below the title, and icon, where you can specify a link to an image
+        that will be displayed as part of the notification. Depending on the browser and operating system, some notifications close automatically
+        after a period of time, and some will stay on the screen until the user clicks on them. You can close a notification within the program by
+        using notification.close().<br>
+        The notification instance has a numbber of events that it can react to, including click (when a user clicks on it), show (when the 
+        notification appears), and close (when the notification is closed). For example, you could add an event listener that opens a new window
+        when the user clicks on it.
+    </p>
+    <p>HTML5 introduced the audio and video tags, which allow you to insert audio and video clips into a webpage. It also introduced a Media API
+        for controlling the playback of the clips using Javascript. An audio clip can be inserted using the < audio > tag, using the src attribute
+        to point to the audio file. A video clip can be inserted with the < video > tag, using the src attribute to point to the file. Any text 
+        inside of the audio and video tags will only display if the browser does not support them, and as such, can be used to display messages to
+        users on older browsers without support for these features. The controls attribute can be added to these tags and will display the browser's
+        native controls, such as play, pause, and volume control. An audio or video element can be referenced by a variable using a DOM method.
+        They have a number of methods and properties to control the playback of the clip. The play() method will start the clip playing from its
+        current position, the pause() clip will pause the clip at its current position, the volume property can be used to set the audio volume,
+        the muted property can be set to true or false to mute the audio, the currentTime property can be used to jump to another part of the clip,
+        the playbackRate property is used to fast-forward or rewind a clip, the loop property can be set to true or false to loop or unloop the 
+        clip, and the duration property can be used to see how long the clip lasts.
+    </p>
+    <p>There are a lot of APIs that you can use, including Drag and Drop or Canvas, which we covered last week.</p>
+    <p>An additional note: There are code libraries called shims and polyfills which can be used to fill in necessary code that isn't provided
+        natively by a user's browser. These are needed when a user is on an out-of-date browser. A shim is a piece of code that adds some missing
+        functionality to a browser, but might not be implemented using the standard API, whereas a polyfill is a shim that achieves the same
+        functionality while also using the API commands that would be used if the feature was supported natively. This means that your code can 
+        use APIs as normal and it will work as normal on older browsers.
+    </p>
+</body>
+</html>
