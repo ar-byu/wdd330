@@ -96,6 +96,12 @@ function renderPokemonDetails(pokemon) {
         nextButton.style.display = 'inline-block'
     }
 
+    let addButton = document.createElement('button')
+    addButton.innerHTML = 'Add to Team'
+    addButton.onclick = () => {
+        console.log('Got to here')
+    }
+
     let name = document.createElement('h1')
     let type = document.createElement('p')
     let subtype = document.createElement('p')
@@ -125,6 +131,7 @@ function renderPokemonDetails(pokemon) {
     details.appendChild(abilitiesTitle)
     details.appendChild(abilities)
     details.appendChild(order)
+    details.appendChild(addButton)
     details.appendChild(closeButton)
 
 }

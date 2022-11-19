@@ -10,6 +10,10 @@ h1 {
     font-family: 'Pokemon Solid', sans-serif;
 }
 
+h2 {
+    font-size: xx-large;
+}
+
 ul, ul li {
     list-style: none;
     padding-top: 5px;
@@ -48,6 +52,12 @@ button {
 
 #close {
     margin-top: 10px;
+}
+
+#team-display {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px 10px 10px 10px;
 }
 
 @media only screen and (min-width: 1000px) {
