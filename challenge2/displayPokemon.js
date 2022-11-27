@@ -1,21 +1,14 @@
 const displayArea = document.getElementById('display')
-const pokemonList = document.createElement('ul')
 const details = document.getElementById('details')
 const backButton = document.getElementById('back')
 const nextButton = document.getElementById('next')
+const teamArea = document.getElementById('team')
 
-function getJSON(url) {
-    return fetch(url)
-    .then((response) => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            console.log('Something went wrong')
-        }
-    })
-}
+import {getPokemon, getPokemonDetails} from './getPokemon.js'
 
-function displayPokemon(url = 'https://pokeapi.co/api/v2/pokemon') {
+export const pokemonList = document.createElement('ul')
+
+export function displayPokemon(url = 'https://pokeapi.co/api/v2/pokemon') {
     getPokemon(url).then(function (data) {
         const results = data.results
         renderItems(results)
@@ -36,12 +29,8 @@ function displayPokemon(url = 'https://pokeapi.co/api/v2/pokemon') {
     })
 }
 
-function getPokemon(url) {
-    return getJSON(url)
-    }
-
 function renderItems(results) {
-    for (pokemon in results) {
+    for (let pokemon in results) {
         let newPokemon = results[pokemon]
         let pokemonName = newPokemon.name
         let newLI = document.createElement('li')
@@ -57,7 +46,6 @@ function renderItems(results) {
 }
 
 function capitalize(string) {
-    // return string.charAt(0).toUpperCase() + string.slice(1)
     let convertedString = string.split('-').map((item) => {
         return item.charAt(0).toUpperCase() + item.slice(1);
       }).join('-');
@@ -70,13 +58,7 @@ function prepareNewPage() {
     }
 }
 
-function getPokemonDetails(url) {
-    getPokemon(url).then(function (data) {
-        renderPokemonDetails(data)
-    })
-}
-
-function renderPokemonDetails(pokemon) {
+export function renderPokemonDetails(pokemon) {
 
     details.style.display = 'block'
     displayArea.style.display = 'none'
@@ -99,7 +81,9 @@ function renderPokemonDetails(pokemon) {
     let addButton = document.createElement('button')
     addButton.innerHTML = 'Add to Team'
     addButton.onclick = () => {
-        console.log('Got to here')
+        let newTeamMember = document.createElement('li')
+        newTeamMember.textContent = capitalize(pokemon.species.name)
+        teamArea.appendChild(newTeamMember)
     }
 
     let name = document.createElement('h1')
@@ -107,7 +91,7 @@ function renderPokemonDetails(pokemon) {
     let subtype = document.createElement('p')
     let abilitiesTitle = document.createElement('h2')
     let abilities = document.createElement('ul')
-    for (ability in pokemon.abilities) {
+    for (let ability in pokemon.abilities) {
         let newAbility = document.createElement('li')
         newAbility.textContent = capitalize(pokemon.abilities[ability].ability.name)
         abilities.appendChild(newAbility)
@@ -133,9 +117,4 @@ function renderPokemonDetails(pokemon) {
     details.appendChild(order)
     details.appendChild(addButton)
     details.appendChild(closeButton)
-
 }
-
-displayPokemon()
-
-displayArea.appendChild(pokemonList)
