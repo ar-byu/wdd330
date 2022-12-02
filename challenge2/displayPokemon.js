@@ -5,6 +5,7 @@ const nextButton = document.getElementById('next')
 const teamArea = document.getElementById('team')
 
 import {getPokemon, getPokemonDetails} from './getPokemon.js'
+import {storePokemon} from './localStorage.js'
 
 export const pokemonList = document.createElement('ul')
 
@@ -45,7 +46,7 @@ function renderItems(results) {
     }
 }
 
-function capitalize(string) {
+export function capitalize(string) {
     let convertedString = string.split('-').map((item) => {
         return item.charAt(0).toUpperCase() + item.slice(1);
       }).join('-');
@@ -84,6 +85,7 @@ export function renderPokemonDetails(pokemon) {
         let newTeamMember = document.createElement('li')
         newTeamMember.textContent = capitalize(pokemon.species.name)
         teamArea.appendChild(newTeamMember)
+        storePokemon(pokemon)
     }
 
     let name = document.createElement('h1')
